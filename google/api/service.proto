@@ -40,9 +40,9 @@ import "google/protobuf/wrappers.proto";
 
 option go_package = "google.golang.org/genproto/googleapis/api/serviceconfig;serviceconfig";
 option java_multiple_files = true;
-option java_outer_classname = "MyServiceProto";
-option java_package = "com.example.myproject";
-option objc_class_prefix = "EXMP";
+option java_outer_classname = "ServiceProto";
+option java_package = "com.google.api";
+option objc_class_prefix = "GAPI";
 
 // `Service` is the root object of Google API service configuration (service
 // config). It describes the basic information about a logical service, such
