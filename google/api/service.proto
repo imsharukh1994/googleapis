@@ -45,82 +45,35 @@ option java_package = "com.google.api";
 option objc_class_prefix = "GAPI";
 
 // `Service` is the root object of Google API service configuration (service
-// config). It describes the basic information about a logical service,
-// such as the service name and the user-facing title, and delegates other
-// aspects to sub-sections. Each sub-section is either a proto message or a
-// repeated proto message that configures a specific aspect, such as auth.
-// For more information, see each proto message definition.
+// config). It describes the basic information about a logical service, such
+// as the service name and the user-facing title, and delegates other aspects
+// to sub-sections.
 //
 // Example:
 //
-//     type: google.api.Service
-//     name: calendar.googleapis.com
-//     title: Google Calendar API
-//     apis:
-//     - name: google.calendar.v3.Calendar
-//
-//     visibility:
-//       rules:
-//       - selector: "google.calendar.v3.*"
-//         restriction: PREVIEW
-//     backend:
-//       rules:
-//       - selector: "google.calendar.v3.*"
-//         address: calendar.example.com
-//
-//     authentication:
-//       providers:
-//       - id: google_calendar_auth
-//         jwks_uri: https://www.googleapis.com/oauth2/v1/certs
-//         issuer: https://securetoken.google.com
-//       rules:
-//       - selector: "*"
-//         requirements:
-//           provider_id: google_calendar_auth
+//     type: my.custom.api.Service
+//     name: example.googleapis.com
+//     title: Example API
 message Service {
-  // The service name, which is a DNS-like logical identifier for the
-  // service, such as `calendar.googleapis.com`. The service name
-  // typically goes through DNS verification to make sure the owner
-  // of the service also owns the DNS name.
+  // The service name, which is a DNS-like logical identifier for the service.
   string name = 1;
 
-  // The product title for this service, it is the name displayed in Google
-  // Cloud Console.
+  // The product title for this service, displayed in user interfaces.
   string title = 2;
 
   // The Google project that owns this service.
   string producer_project_id = 22;
 
-  // A unique ID for a specific instance of this message, typically assigned
-  // by the client for tracking purpose. Must be no longer than 63 characters
-  // and only lower case letters, digits, '.', '_' and '-' are allowed. If
-  // empty, the server may choose to generate one instead.
+  // A unique ID for tracking this configuration instance.
   string id = 33;
 
-  // A list of API interfaces exported by this service. Only the `name` field
-  // of the [google.protobuf.Api][google.protobuf.Api] needs to be provided by
-  // the configuration author, as the remaining fields will be derived from the
-  // IDL during the normalization process. It is an error to specify an API
-  // interface here which cannot be resolved against the associated IDL files.
+  // A list of API interfaces exported by this service.
   repeated google.protobuf.Api apis = 3;
 
   // A list of all proto message types included in this API service.
-  // Types referenced directly or indirectly by the `apis` are automatically
-  // included.  Messages which are not referenced but shall be included, such as
-  // types used by the `google.protobuf.Any` type, should be listed here by
-  // name by the configuration author. Example:
-  //
-  //     types:
-  //     - name: google.protobuf.Int32
   repeated google.protobuf.Type types = 4;
 
-  // A list of all enum types included in this API service.  Enums referenced
-  // directly or indirectly by the `apis` are automatically included.  Enums
-  // which are not referenced but shall be included should be listed here by
-  // name by the configuration author. Example:
-  //
-  //     enums:
-  //     - name: google.someapi.v1.SomeEnum
+  // A list of all enum types included in this API service.
   repeated google.protobuf.Enum enums = 5;
 
   // Additional API documentation.
@@ -144,9 +97,7 @@ message Service {
   // Configuration controlling usage of this service.
   Usage usage = 15;
 
-  // Configuration for network endpoints.  If this is empty, then an endpoint
-  // with the same name as the service is automatically generated to service all
-  // defined APIs.
+  // Configuration for network endpoints.
   repeated Endpoint endpoints = 18;
 
   // Configuration for the service control plane.
@@ -158,9 +109,7 @@ message Service {
   // Defines the metrics used by this service.
   repeated MetricDescriptor metrics = 24;
 
-  // Defines the monitored resources used by this service. This is required
-  // by the [Service.monitoring][google.api.Service.monitoring] and
-  // [Service.logging][google.api.Service.logging] configurations.
+  // Defines the monitored resources used by this service.
   repeated MonitoredResourceDescriptor monitored_resources = 25;
 
   // Billing configuration.
@@ -175,17 +124,17 @@ message Service {
   // System parameter configuration.
   SystemParameters system_parameters = 29;
 
-  // Output only. The source information for this configuration if available.
+  // Output only. The source information for this configuration.
   SourceInfo source_info = 37;
 
-  // Settings for [Google Cloud Client
-  // libraries](https://cloud.google.com/apis/docs/cloud-client-libraries)
-  // generated from APIs defined as protocol buffers.
+  // Settings for Google Cloud Client libraries.
   Publishing publishing = 45;
 
+  // Example of a custom field.
+  // Metadata field for additional information, optional.
+  string metadata = 50;
+
   // Obsolete. Do not use.
-  //
-  // This field has no semantic meaning. The service config compiler always
-  // sets this field to `3`.
   google.protobuf.UInt32Value config_version = 20;
 }
+
