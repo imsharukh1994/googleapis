@@ -14,7 +14,7 @@
 
 syntax = "proto3";
 
-package my.custom.api;
+package google.api;
 
 import "google/api/auth.proto";
 import "google/api/backend.proto";
@@ -38,7 +38,7 @@ import "google/protobuf/api.proto";
 import "google/protobuf/type.proto";
 import "google/protobuf/wrappers.proto";
 
-option go_package = "example.com/myproject/protos;myproject";
+option go_package = "google.golang.org/genproto/googleapis/api/serviceconfig;serviceconfig";
 option java_multiple_files = true;
 option java_outer_classname = "MyServiceProto";
 option java_package = "com.example.myproject";
